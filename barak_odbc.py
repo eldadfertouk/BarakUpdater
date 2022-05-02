@@ -6,9 +6,11 @@
 
 import os
 import shutil
-import pypyodbc
+
 #"Z:\\barak\\DATA-NEW\\"
 # Set this to the full fold path of your database:
+import pyodbc as pyodbc
+
 DBFolder = "C:\\Users\\Eldad\\Documents\\barak\\DATA-NEW"
 
 
@@ -51,7 +53,7 @@ def DBConnect(folder):
     SQLConnectionString = r"Driver={{Microsoft Paradox Driver (*.db )\}};DriverID=538;Fil=Paradox 7.X;DefaultDir={0};Dbq={0};CollatingSequence=ASCII;".format(
         folder)
 
-    dbConn = pypyodbc.connect(SQLConnectionString, autocommit=True)
+    dbConn = pyodbc.connect(SQLConnectionString, autocommit=True)
     return dbConn.cursor()
 
 
