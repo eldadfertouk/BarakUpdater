@@ -33,7 +33,6 @@ def main():
     #todo: get user options
     #print('choose server\n')
     #print('\nMED '+MEDSAFE_SERVER_URL,'\nTERRA '+TLV1_SERVER_URL,'\nBINAT '+BINAT_SERVER_URL)
-
     get_data()
 
 
