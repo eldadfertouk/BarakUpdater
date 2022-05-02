@@ -30,6 +30,35 @@ def create_menu():
     main_window.config(menu=menu)
 
 
+def options_panel_create():
+    class Checkbar(Frame):
+        def __init__(self, parent=main_window, picks=[], side=LEFT, anchor=W):
+            Frame.__init__(self, parent)
+            self.vars = []
+            for pick in picks:
+                var = IntVar()
+                chk = Checkbutton(self, text=pick, variable=var)
+                chk.pack(side=side, anchor=anchor, expand=YES)
+                self.vars.append(var)
+
+        def state(self):
+            return map((lambda var: var.get()), self.vars)
+
+    root = Tk()
+    lng = Checkbar(root, ['Clients Erorrs', 'servers status', 'Billing', 'Quota Update'])
+    tgl = Checkbar(root, ['To File', 'Send To Server'])
+    lng.pack(side=TOP, fill=X)
+    tgl.pack(side=LEFT)
+    #lng.config(relief=GROOVE, bd=2)
+
+    def allstates():
+        print(list(lng.state()), list(tgl.state()))#action run using the buttons
+
+    Button(root, text='File', command=root.quit).pack(side=RIGHT)
+    Button(root, text='Display', command=allstates).pack(side=RIGHT)
+    root.mainloop()
+
+
 def main():
     data_panel = tk.Tk()
     data_panel.title("SERVERS HEALTH STATUS - TERRA SAFE")
@@ -85,8 +114,10 @@ def main():
     run_query_btn.grid(column=1, row=11)
    # sn = SYSTEM_SPY.retriveSerialTagNumber()
     #text_view(10, 5, 0, 0,sn)
+    options_panel_create()
     main_window.mainloop()
 
 
 if __name__ == '__main__':
     main()
+
